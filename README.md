@@ -1,7 +1,7 @@
-![Release](https://img.shields.io/github/v/release/ahmetoner/whisper-asr-webservice.svg)
-![Docker Pulls](https://img.shields.io/docker/pulls/onerahmet/openai-whisper-asr-webservice.svg)
-![Build](https://img.shields.io/github/actions/workflow/status/ahmetoner/whisper-asr-webservice/docker-publish.yml.svg)
-![Licence](https://img.shields.io/github/license/ahmetoner/whisper-asr-webservice.svg)
+![Release](https://img.shields.io/github/v/release/pbusenius/whisper-asr-webservice.svg)
+![Docker Pulls](https://img.shields.io/docker/pulls/pbusenius/openai-whisper-asr-webservice.svg)
+![Build](https://img.shields.io/github/actions/workflow/status/pbusenius/whisper-asr-webservice/docker-publish.yml.svg)
+![Licence](https://img.shields.io/github/license/pbusenius/whisper-asr-webservice.svg)
 
 > 🎉 **Join our Discord Community!** Connect with other users, get help, and stay updated on the latest features: [https://discord.gg/4Q5YVrePzZ](https://discord.gg/4Q5YVrePzZ)
 
@@ -25,7 +25,7 @@ Current release (v1.9.1) supports following whisper models:
 docker run -d -p 9000:9000 \
   -e ASR_MODEL=base \
   -e ASR_ENGINE=openai_whisper \
-  onerahmet/openai-whisper-asr-webservice:latest
+  pbusenius/openai-whisper-asr-webservice:latest
 ```
 
 ### GPU
@@ -34,7 +34,7 @@ docker run -d -p 9000:9000 \
 docker run -d --gpus all -p 9000:9000 \
   -e ASR_MODEL=base \
   -e ASR_ENGINE=openai_whisper \
-  onerahmet/openai-whisper-asr-webservice:latest-gpu
+  pbusenius/openai-whisper-asr-webservice:latest-gpu
 ```
 
 #### Cache
@@ -44,7 +44,7 @@ To reduce container startup time by avoiding repeated downloads, you can persist
 ```shell
 docker run -d -p 9000:9000 \
   -v $PWD/cache:/root/.cache/ \
-  onerahmet/openai-whisper-asr-webservice:latest
+  pbusenius/openai-whisper-asr-webservice:latest
 ```
 
 ## Key Features
@@ -72,7 +72,7 @@ Key configuration options:
 ## Documentation
 
 For complete documentation, visit:
-[https://ahmetoner.github.io/whisper-asr-webservice](https://ahmetoner.github.io/whisper-asr-webservice)
+[https://pbusenius.github.io/whisper-asr-webservice](https://pbusenius.github.io/whisper-asr-webservice)
 
 ## Development
 
@@ -91,6 +91,19 @@ poetry run whisper-asr-webservice --host 0.0.0.0 --port 9000
 ```
 
 After starting the service, visit `http://localhost:9000` or `http://0.0.0.0:9000` in your browser to access the Swagger UI documentation and try out the API endpoints.
+
+## TODO
+
+Observability improvements:
+
+- [ ] Structured logging (replace print statements with proper logging infrastructure)
+- [ ] Health check endpoints (`/health`, `/ready`)
+- [ ] Prometheus metrics endpoint (`/metrics`)
+- [ ] Request duration tracking
+
+New ASR models:
+
+- [ ] Add Voxtral ASR model support
 
 ## Credits
 

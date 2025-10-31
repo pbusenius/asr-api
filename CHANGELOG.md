@@ -212,7 +212,7 @@ Unreleased
   - Ensure Docker volume is set for the corresponding directory to use caching.
 
       ```bash
-      docker run -d -p 9000:9000 -e ASR_MODEL_PATH=/data/whisper -v $PWD/yourlocaldir:/data/whisper onerahmet/openai-whisper-asr-webservice:latest
+      docker run -d -p 9000:9000 -e ASR_MODEL_PATH=/data/whisper -v $PWD/yourlocaldir:/data/whisper pbusenius/openai-whisper-asr-webservice:latest
       ```
 
 - Removed the `triton` dependency from `poetry.lock` to ensure the stability of the pipeline for `ARM-based` Docker images
@@ -306,29 +306,29 @@ Unreleased
 - mp3 support by using FFmpeg instead of librosa in #8
 - add language detection endpoint in #9
 
-[1.9.1]: https://github.com/ahmetoner/whisper-asr-webservice/releases/tag/v1.9.1
-[1.9.0]: https://github.com/ahmetoner/whisper-asr-webservice/releases/tag/v1.9.0
-[1.8.2]: https://github.com/ahmetoner/whisper-asr-webservice/releases/tag/v1.8.2
-[1.8.1]: https://github.com/ahmetoner/whisper-asr-webservice/releases/tag/v1.8.1
-[1.8.0]: https://github.com/ahmetoner/whisper-asr-webservice/releases/tag/v1.8.0
-[1.7.1]: https://github.com/ahmetoner/whisper-asr-webservice/releases/tag/v1.7.1
-[1.7.0]: https://github.com/ahmetoner/whisper-asr-webservice/releases/tag/v1.7.0
-[1.6.0]: https://github.com/ahmetoner/whisper-asr-webservice/releases/tag/v1.6.0
-[1.5.0]: https://github.com/ahmetoner/whisper-asr-webservice/releases/tag/v1.5.0
-[1.4.1]: https://github.com/ahmetoner/whisper-asr-webservice/releases/tag/v1.4.1
-[1.4.0]: https://github.com/ahmetoner/whisper-asr-webservice/releases/tag/v1.4.0
-[1.3.0]: https://github.com/ahmetoner/whisper-asr-webservice/releases/tag/v1.3.0
-[1.2.4]: https://github.com/ahmetoner/whisper-asr-webservice/releases/tag/v1.2.4
-[1.2.3]: https://github.com/ahmetoner/whisper-asr-webservice/releases/tag/v1.2.3
-[1.2.2]: https://github.com/ahmetoner/whisper-asr-webservice/releases/tag/v1.2.2
-[1.2.1]: https://github.com/ahmetoner/whisper-asr-webservice/releases/tag/v1.2.1
-[1.2.0]: https://github.com/ahmetoner/whisper-asr-webservice/releases/tag/v1.2.0
-[1.1.1]: https://github.com/ahmetoner/whisper-asr-webservice/releases/tag/v1.1.1
-[1.1.0]: https://github.com/ahmetoner/whisper-asr-webservice/releases/tag/v1.1.0
-[1.0.6]: https://github.com/ahmetoner/whisper-asr-webservice/releases/tag/v1.0.6
-[1.0.5]: https://github.com/ahmetoner/whisper-asr-webservice/releases/tag/v1.0.5
-[1.0.4]: https://github.com/ahmetoner/whisper-asr-webservice/releases/tag/v1.0.4
-[1.0.3-beta]: https://github.com/ahmetoner/whisper-asr-webservice/releases/tag/v1.0.3-beta
-[1.0.2-beta]: https://github.com/ahmetoner/whisper-asr-webservice/releases/tag/v1.0.2-beta
-[1.0.1-beta]: https://github.com/ahmetoner/whisper-asr-webservice/releases/tag/v1.0.1-beta
-[1.0.0-beta]: https://github.com/ahmetoner/whisper-asr-webservice/releases/tag/1.0.0-beta
+[1.9.1]: https://github.com/pbusenius/whisper-asr-webservice/releases/tag/v1.9.1
+[1.9.0]: https://github.com/pbusenius/whisper-asr-webservice/releases/tag/v1.9.0
+[1.8.2]: https://github.com/pbusenius/whisper-asr-webservice/releases/tag/v1.8.2
+[1.8.1]: https://github.com/pbusenius/whisper-asr-webservice/releases/tag/v1.8.1
+[1.8.0]: https://github.com/pbusenius/whisper-asr-webservice/releases/tag/v1.8.0
+[1.7.1]: https://github.com/pbusenius/whisper-asr-webservice/releases/tag/v1.7.1
+[1.7.0]: https://github.com/pbusenius/whisper-asr-webservice/releases/tag/v1.7.0
+[1.6.0]: https://github.com/pbusenius/whisper-asr-webservice/releases/tag/v1.6.0
+[1.5.0]: https://github.com/pbusenius/whisper-asr-webservice/releases/tag/v1.5.0
+[1.4.1]: https://github.com/pbusenius/whisper-asr-webservice/releases/tag/v1.4.1
+[1.4.0]: https://github.com/pbusenius/whisper-asr-webservice/releases/tag/v1.4.0
+[1.3.0]: https://github.com/pbusenius/whisper-asr-webservice/releases/tag/v1.3.0
+[1.2.4]: https://github.com/pbusenius/whisper-asr-webservice/releases/tag/v1.2.4
+[1.2.3]: https://github.com/pbusenius/whisper-asr-webservice/releases/tag/v1.2.3
+[1.2.2]: https://github.com/pbusenius/whisper-asr-webservice/releases/tag/v1.2.2
+[1.2.1]: https://github.com/pbusenius/whisper-asr-webservice/releases/tag/v1.2.1
+[1.2.0]: https://github.com/pbusenius/whisper-asr-webservice/releases/tag/v1.2.0
+[1.1.1]: https://github.com/pbusenius/whisper-asr-webservice/releases/tag/v1.1.1
+[1.1.0]: https://github.com/pbusenius/whisper-asr-webservice/releases/tag/v1.1.0
+[1.0.6]: https://github.com/pbusenius/whisper-asr-webservice/releases/tag/v1.0.6
+[1.0.5]: https://github.com/pbusenius/whisper-asr-webservice/releases/tag/v1.0.5
+[1.0.4]: https://github.com/pbusenius/whisper-asr-webservice/releases/tag/v1.0.4
+[1.0.3-beta]: https://github.com/pbusenius/whisper-asr-webservice/releases/tag/v1.0.3-beta
+[1.0.2-beta]: https://github.com/pbusenius/whisper-asr-webservice/releases/tag/v1.0.2-beta
+[1.0.1-beta]: https://github.com/pbusenius/whisper-asr-webservice/releases/tag/v1.0.1-beta
+[1.0.0-beta]: https://github.com/pbusenius/whisper-asr-webservice/releases/tag/1.0.0-beta

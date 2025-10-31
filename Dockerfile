@@ -1,10 +1,10 @@
-FROM onerahmet/ffmpeg:n7.1 AS ffmpeg
+FROM pbusenius/ffmpeg:n7.1 AS ffmpeg
 
 FROM swaggerapi/swagger-ui:v5.9.1 AS swagger-ui
 
 FROM python:3.10-bookworm
 
-LABEL org.opencontainers.image.source="https://github.com/ahmetoner/whisper-asr-webservice"
+LABEL org.opencontainers.image.source="https://github.com/pbusenius/whisper-asr-webservice"
 
 ENV POETRY_VENV=/app/.venv
 

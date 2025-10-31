@@ -1,10 +1,10 @@
 site_name: Whisper ASR Webservice
-site_url: https://ahmetoner.github.io/whisper-asr-webservice
+site_url: https://pbusenius.github.io/whisper-asr-webservice
 site_dir: public
 
 site_description: "OpenAI Whisper ASR Webservice API"
-repo_url: "https://github.com/ahmetoner/whisper-asr-webservice"
-repo_name: "ahmetoner/whisper-asr-webservice"
+repo_url: "https://github.com/pbusenius/whisper-asr-webservice"
+repo_name: "pbusenius/whisper-asr-webservice"
 copyright: Copyright &copy; 2025
 edit_uri: edit/main/docs/
 
@@ -21,8 +21,8 @@ nav:
   - Development: build.md
   - Changelog: changelog.md
   - License: licence.md
-  - Releases: https://github.com/ahmetoner/whisper-asr-webservice/releases
-  - Docker Hub: https://hub.docker.com/r/onerahmet/openai-whisper-asr-webservice
+  - Releases: https://github.com/pbusenius/whisper-asr-webservice/releases
+  - Docker Hub: https://hub.docker.com/r/pbusenius/openai-whisper-asr-webservice
 
 theme:
   name: material
@@ -107,6 +107,6 @@ extra:
   generator: false 
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/ahmetoner
+      link: https://github.com/pbusenius
     - icon: fontawesome/brands/docker
-      link: https://hub.docker.com/u/onerahmet
+      link: https://hub.docker.com/u/pbusenius

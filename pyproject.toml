@@ -17,8 +17,7 @@ dependencies = [
     "numba (>=0.61.2)",
 ]
 authors = [
-    { name = "Ahmet Öner" },
-    { name = "Besim Alibegovic" }
+    { name = "pbusenius" }
 ]
 license = { text = "MIT" }
 readme = "README.md"
@@ -29,8 +28,8 @@ requires-poetry = ">=2.0"
 packages = [{ include = "app" }]
 
 [project.urls]
-Homepage = "https://github.com/ahmetoner/whisper-asr-webservice/"
-Repository = "https://github.com/ahmetoner/whisper-asr-webservice"
+Homepage = "https://github.com/pbusenius/whisper-asr-webservice/"
+Repository = "https://github.com/pbusenius/whisper-asr-webservice"
 
 [project.scripts]
 whisper-asr-webservice = "app.webservice:start"
