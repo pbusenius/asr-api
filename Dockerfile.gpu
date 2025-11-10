@@ -8,8 +8,6 @@ LABEL org.opencontainers.image.source="https://github.com/pbusenius/whisper-asr-
 
 ENV PYTHON_VERSION=3.10
 
-ENV POETRY_VENV=/app/.venv
-
 RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get -qq update \
     && apt-get -qq install --no-install-recommends \
@@ -17,29 +15,27 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     python${PYTHON_VERSION}-venv \
     python3-pip \
     libcudnn8 \
-    python3-pip \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
 RUN ln -s -f /usr/bin/python${PYTHON_VERSION} /usr/bin/python3 && \
     ln -s -f /usr/bin/python${PYTHON_VERSION} /usr/bin/python && \
     ln -s -f /usr/bin/pip3 /usr/bin/pip
 
-RUN python3 -m venv $POETRY_VENV \
-    && $POETRY_VENV/bin/pip install -U pip setuptools \
-    && $POETRY_VENV/bin/pip install poetry==2.1.3
-
-ENV PATH="${PATH}:${POETRY_VENV}/bin"
-
 WORKDIR /app
+
+# Install uv
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
 
 COPY . .
 COPY --from=ffmpeg /usr/local/bin/ffmpeg /usr/local/bin/ffmpeg
 COPY --from=swagger-ui /usr/share/nginx/html/swagger-ui.css swagger-ui-assets/swagger-ui.css
 COPY --from=swagger-ui /usr/share/nginx/html/swagger-ui-bundle.js swagger-ui-assets/swagger-ui-bundle.js
 
-RUN poetry config virtualenvs.in-project true
-RUN poetry install --extras cuda
+RUN uv sync --extra cuda
 
 EXPOSE 9000
+
+ENV PATH="/app/.venv/bin:${PATH}"
 
 ENTRYPOINT ["whisper-asr-webservice"]

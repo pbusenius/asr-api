@@ -7,7 +7,6 @@ from typing import Optional
 from opentelemetry import metrics, trace
 from opentelemetry.exporter.prometheus import PrometheusMetricReader
 from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
-from opentelemetry.instrumentation.http import HTTPClientInstrumentor
 from opentelemetry.sdk.metrics import MeterProvider
 from opentelemetry.sdk.resources import Resource
 from opentelemetry.sdk.trace import TracerProvider
@@ -65,9 +64,6 @@ def setup_telemetry(app, service_name: Optional[str] = None):
 
     # Instrument FastAPI
     FastAPIInstrumentor.instrument_app(app)
-
-    # Instrument HTTP client (for any outgoing HTTP requests)
-    HTTPClientInstrumentor().instrument()
 
     print(f"OpenTelemetry instrumentation enabled for service: {service_name}")
 

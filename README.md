@@ -77,17 +77,17 @@ For complete documentation, visit:
 ## Development
 
 ```shell
-# Install poetry v2.X
-pip3 install poetry
+# Install uv (if not already installed)
+curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # Install dependencies for cpu
-poetry install --extras cpu
+uv sync --extra cpu
 
 # Install dependencies for cuda
-poetry install --extras cuda
+uv sync --extra cuda
 
 # Run service
-poetry run whisper-asr-webservice --host 0.0.0.0 --port 9000
+uv run whisper-asr-webservice --host 0.0.0.0 --port 9000
 ```
 
 After starting the service, visit `http://localhost:9000` or `http://0.0.0.0:9000` in your browser to access the Swagger UI documentation and try out the API endpoints.
