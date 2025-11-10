@@ -23,22 +23,10 @@ asr_model.load_model()
 LANGUAGE_CODES = sorted(tokenizer.LANGUAGES.keys())
 
 projectMetadata = importlib.metadata.metadata("whisper-asr-webservice")
-# Get homepage URL - PEP 621 stores URLs in Project-URL metadata
-homepage_url = "https://github.com/pbusenius/whisper-asr-webservice/"
-if "Project-URL" in projectMetadata:
-    urls = projectMetadata.get_all("Project-URL")
-    for url in urls:
-        if url.startswith("Homepage"):
-            homepage_url = url.split(",", 1)[1].strip()
-            break
 
 app = FastAPI(
-    title=projectMetadata["Name"].title().replace("-", " "),
-    description=projectMetadata["Summary"],
-    version=projectMetadata["Version"],
-    contact={"url": homepage_url},
+    title="ASR-API",
     swagger_ui_parameters={"defaultModelsExpandDepth": -1},
-    license_info={"name": "MIT License", "url": "https://github.com/pbusenius/whisper-asr-webservice/blob/main/LICENCE"},
 )
 
 # Set up OpenTelemetry instrumentation
