@@ -64,10 +64,12 @@ async def health():
     return {"status": "ok"}
 
 
-@app.get(CONFIG.OTEL_PROMETHEUS_METRICS_PATH, tags=["Monitoring"], include_in_schema=False)
+@app.get(CONFIG.OTEL_PROMETHEUS_METRICS_PATH, tags=["Monitoring"])
 async def metrics():
     """
     Prometheus metrics endpoint for OpenTelemetry metrics.
+    
+    Returns Prometheus-formatted metrics that can be scraped by monitoring systems.
     """
     metrics_reader = get_metrics_reader()
     if metrics_reader is None:
