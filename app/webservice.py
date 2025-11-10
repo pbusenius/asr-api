@@ -56,6 +56,14 @@ async def index():
     return "/docs"
 
 
+@app.get("/health", tags=["Monitoring"], status_code=200)
+async def health():
+    """
+    Health check endpoint.
+    """
+    return {"status": "ok"}
+
+
 @app.get(CONFIG.OTEL_PROMETHEUS_METRICS_PATH, tags=["Monitoring"], include_in_schema=False)
 async def metrics():
     """
