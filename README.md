@@ -83,11 +83,14 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 # Install dependencies for cpu
 uv sync --extra cpu
 
-# Install dependencies for cuda
-uv sync --extra cuda
+# Install dependencies for cuda (GPU)
+uv sync --extra cuda --extra-index-url https://download.pytorch.org/whl/cu126
 
-# Run service
+# Run service (CPU)
 uv run whisper-asr-webservice --host 0.0.0.0 --port 9000
+
+# Run service (GPU/CUDA)
+uv run --extra cuda --extra-index-url https://download.pytorch.org/whl/cu126 whisper-asr-webservice --host 0.0.0.0 --port 9000
 ```
 
 After starting the service, visit `http://localhost:9000` or `http://0.0.0.0:9000` in your browser to access the Swagger UI documentation and try out the API endpoints.
