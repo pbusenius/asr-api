@@ -11,11 +11,12 @@ Whisper ASR Box is a general-purpose speech recognition toolkit. Whisper Models 
 
 ## Features
 
-Current release (v1.9.1) supports following whisper models:
+Current release (v1.10.0-dev) supports following whisper models:
 
 - [openai/whisper](https://github.com/openai/whisper)@[v20250625](https://github.com/openai/whisper/releases/tag/v20250625)
 - [SYSTRAN/faster-whisper](https://github.com/SYSTRAN/faster-whisper)@[v1.1.1](https://github.com/SYSTRAN/faster-whisper/releases/tag/v1.1.1)
 - [whisperX](https://github.com/m-bain/whisperX)@[v3.4.2](https://github.com/m-bain/whisperX/releases/tag/v3.4.2)
+- [Voxtral](https://voxtral.life/) (Mistral AI)
 
 ## Quick Usage
 
@@ -49,7 +50,7 @@ docker run -d -p 9000:9000 \
 
 ## Key Features
 
-- Multiple ASR engines support (OpenAI Whisper, Faster Whisper, WhisperX)
+- Multiple ASR engines support (OpenAI Whisper, Faster Whisper, WhisperX, Voxtral)
 - Multiple output formats (text, JSON, VTT, SRT, TSV)
 - Word-level timestamps support
 - Voice activity detection (VAD) filtering
@@ -58,16 +59,22 @@ docker run -d -p 9000:9000 \
 - GPU acceleration support
 - Configurable model loading/unloading
 - REST API with Swagger documentation
+- OpenTelemetry monitoring and observability
+- Health check endpoint (`/health`)
+- Prometheus metrics endpoint (`/metrics`)
 
 ## Environment Variables
 
 Key configuration options:
 
-- `ASR_ENGINE`: Engine selection (openai_whisper, faster_whisper, whisperx)
-- `ASR_MODEL`: Model selection (tiny, base, small, medium, large-v3, etc.)
+- `ASR_ENGINE`: Engine selection (openai_whisper, faster_whisper, whisperx, voxtral)
+- `ASR_MODEL`: Model selection (tiny, base, small, medium, large-v3, etc. or Voxtral-Mini-3B-2507 for Voxtral)
 - `ASR_MODEL_PATH`: Custom path to store/load models
 - `ASR_DEVICE`: Device selection (cuda, cpu)
 - `MODEL_IDLE_TIMEOUT`: Timeout for model unloading
+- `OTEL_ENABLED`: Enable/disable OpenTelemetry instrumentation (default: true)
+- `OTEL_SERVICE_NAME`: Service name for OpenTelemetry (default: whisper-asr-webservice)
+- `OTEL_EXPORTER_OTLP_ENDPOINT`: Optional OTLP endpoint for traces/metrics
 
 ## Development
 
@@ -95,13 +102,13 @@ After starting the service, visit `http://localhost:9000` or `http://0.0.0.0:900
 Observability improvements:
 
 - [ ] Structured logging (replace print statements with proper logging infrastructure)
-- [ ] Health check endpoints (`/health`, `/ready`)
-- [ ] Prometheus metrics endpoint (`/metrics`)
-- [ ] Request duration tracking
+- [x] Health check endpoints (`/health`, `/ready`)
+- [x] Prometheus metrics endpoint (`/metrics`)
+- [x] Request duration tracking
 
 New ASR models:
 
-- [ ] Add Voxtral ASR model support
+- [x] Add Voxtral ASR model support
 
 ## Credits
 
