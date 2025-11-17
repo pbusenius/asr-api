@@ -196,6 +196,9 @@ dependencies = [
 ]
 
 [package.optional-dependencies]
+benchmark = [
+    { name = "requests" },
+]
 cpu = [
     { name = "torch", version = "2.7.1", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "sys_platform == 'darwin'" },
     { name = "torch", version = "2.7.1+cpu", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "sys_platform != 'darwin'" },
@@ -235,6 +238,7 @@ requires-dist = [
     { name = "prometheus-client", specifier = ">=0.20.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.3.4,<9.0.0" },
     { name = "python-multipart", specifier = ">=0.0.20" },
+    { name = "requests", marker = "extra == 'benchmark'", specifier = ">=2.31.0" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.9.6,<1.0.0" },
     { name = "torch", marker = "extra == 'cpu'", specifier = "==2.7.1", index = "https://download.pytorch.org/whl/cpu" },
     { name = "torch", marker = "extra == 'cuda'", specifier = "==2.7.1", index = "https://download.pytorch.org/whl/cpu" },
@@ -245,7 +249,7 @@ requires-dist = [
     { name = "uvicorn", extras = ["standard"], specifier = ">=0.35.0" },
     { name = "whisperx", specifier = ">=3.4.2" },
 ]
-provides-extras = ["cpu", "cuda", "dev", "otlp"]
+provides-extras = ["cpu", "cuda", "dev", "otlp", "benchmark"]
 
 [[package]]
 name = "asteroid-filterbanks"
