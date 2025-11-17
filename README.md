@@ -3,9 +3,9 @@
 ![Build](https://img.shields.io/github/actions/workflow/status/pbusenius/whisper-asr-webservice/docker-publish.yml.svg)
 ![Licence](https://img.shields.io/github/license/pbusenius/whisper-asr-webservice.svg)
 
-# Whisper ASR Box
+# ASR-API
 
-Whisper ASR Box is a general-purpose speech recognition toolkit. Whisper Models are trained on a large dataset of diverse audio and is also a multitask model that can perform multilingual speech recognition as well as speech translation and language identification.
+ASR-API is a general-purpose speech recognition toolkit. Whisper Models are trained on a large dataset of diverse audio and is also a multitask model that can perform multilingual speech recognition as well as speech translation and language identification.
 
 ## Features
 
@@ -71,7 +71,7 @@ Key configuration options:
 - `ASR_DEVICE`: Device selection (cuda, cpu)
 - `MODEL_IDLE_TIMEOUT`: Timeout for model unloading
 - `OTEL_ENABLED`: Enable/disable OpenTelemetry instrumentation (default: true)
-- `OTEL_SERVICE_NAME`: Service name for OpenTelemetry (default: whisper-asr-webservice)
+- `OTEL_SERVICE_NAME`: Service name for OpenTelemetry (default: asr-api)
 - `OTEL_EXPORTER_OTLP_ENDPOINT`: Optional OTLP endpoint for traces/metrics
 
 ## Development
@@ -87,10 +87,10 @@ uv sync --extra cpu
 uv sync --extra cuda --extra-index-url https://download.pytorch.org/whl/cu126
 
 # Run service (CPU)
-uv run whisper-asr-webservice --host 0.0.0.0 --port 9000
+uv run asr-api --host 0.0.0.0 --port 9000
 
 # Run service (GPU/CUDA)
-uv run --extra cuda --extra-index-url https://download.pytorch.org/whl/cu126 whisper-asr-webservice --host 0.0.0.0 --port 9000
+uv run --extra cuda --extra-index-url https://download.pytorch.org/whl/cu126 asr-api --host 0.0.0.0 --port 9000
 ```
 
 After starting the service, visit `http://localhost:9000` or `http://0.0.0.0:9000` in your browser to access the Swagger UI documentation and try out the API endpoints.

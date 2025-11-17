@@ -51,7 +51,7 @@ class CONFIG:
     OTEL_ENABLED = os.getenv("OTEL_ENABLED", "true").lower() == "true"
 
     # Service name for OpenTelemetry
-    OTEL_SERVICE_NAME = os.getenv("OTEL_SERVICE_NAME", "whisper-asr-webservice")
+    OTEL_SERVICE_NAME = os.getenv("OTEL_SERVICE_NAME", "asr-api")
 
     # OTLP exporter endpoint (optional, for sending traces/metrics to collector)
     OTEL_EXPORTER_OTLP_ENDPOINT = os.getenv("OTEL_EXPORTER_OTLP_ENDPOINT", "")

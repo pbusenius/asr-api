@@ -1,7 +1,7 @@
 [project]
-name = "whisper-asr-webservice"
+name = "asr-api"
 version = "1.10.0-dev"
-description = "Whisper ASR Webservice is a general-purpose speech recognition webservice."
+description = "ASR-API is a general-purpose speech recognition webservice."
 requires-python = ">=3.10,<3.13"
 dependencies = [
     "fastapi (>=0.115.14)",
@@ -34,7 +34,7 @@ Homepage = "https://github.com/pbusenius/whisper-asr-webservice/"
 Repository = "https://github.com/pbusenius/whisper-asr-webservice"
 
 [project.scripts]
-whisper-asr-webservice = "app.webservice:start"
+asr-api = "app.webservice:start"
 
 [project.optional-dependencies]
 cpu = [

@@ -22,7 +22,7 @@ asr_model.load_model()
 
 LANGUAGE_CODES = sorted(tokenizer.LANGUAGES.keys())
 
-projectMetadata = importlib.metadata.metadata("whisper-asr-webservice")
+projectMetadata = importlib.metadata.metadata("asr-api")
 
 app = FastAPI(
     title="ASR-API",

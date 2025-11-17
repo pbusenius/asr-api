@@ -22,4 +22,4 @@ EXPOSE 9000
 
 ENV PATH="/app/.venv/bin:${PATH}"
 
-ENTRYPOINT ["whisper-asr-webservice"]
+ENTRYPOINT ["asr-api"]
