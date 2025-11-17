@@ -25,6 +25,15 @@ spec:
               value: "base"
             - name: ASR_ENGINE
               value: "faster_whisper"
+            - name: OTEL_ENABLED
+              value: "true"
+            - name: OTEL_SERVICE_NAME
+              value: "asr-api"
+            - name: OTEL_PROMETHEUS_METRICS_PATH
+              value: "/metrics"
+            # Optional: If you want to push metrics via OTLP instead of scraping
+            # - name: OTEL_EXPORTER_OTLP_ENDPOINT
+            #   value: "http://prometheus-server.monitoring.svc.cluster.local:80"
           resources:
             requests:
               memory: "2Gi"
