@@ -17,7 +17,7 @@ help: ## Show this help message
 	@echo 'Available targets:'
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "  %-15s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
-build: build-cpu build-gpu ## Build both CPU and GPU Docker images
+docker-build: build-cpu build-gpu ## Build both CPU and GPU Docker images
 
 build-cpu: ## Build CPU Docker image
 	@echo "Building CPU image: $(CPU_TAG)"
@@ -27,7 +27,7 @@ build-gpu: ## Build GPU Docker image
 	@echo "Building GPU image: $(GPU_TAG)"
 	docker build -f Dockerfile.gpu -t $(GPU_TAG) -t $(GPU_LATEST) .
 
-push: push-all ## Push both CPU and GPU Docker images
+docker-push: push-all ## Push both CPU and GPU Docker images
 
 push-cpu: ## Push CPU Docker images
 	@echo "Pushing CPU images: $(CPU_TAG) and $(CPU_LATEST)"
