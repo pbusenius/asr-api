@@ -53,10 +53,16 @@ async def index():
     return "/docs"
 
 
-@app.get("/health", tags=["Monitoring"], status_code=200)
+@app.get("/health", tags=["Monitoring"], status_code=200, summary="Health check", description="Health check endpoint for monitoring and load balancers")
 async def health():
     """
     Health check endpoint.
+    
+    Returns a simple status object indicating the service is healthy.
+    Used by monitoring systems, load balancers, and Kubernetes readiness probes.
+    
+    Returns:
+        dict: Status object with "status": "ok"
     """
     return {"status": "ok"}
 

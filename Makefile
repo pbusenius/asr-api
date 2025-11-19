@@ -1,7 +1,7 @@
 .PHONY: build build-cpu build-gpu push push-cpu push-gpu push-all clean clean-images clean-containers help
 
 # Variables
-VERSION := 0.1
+VERSION := 0.1.1
 IMAGE_NAME := pbusenius/asr-api
 CPU_TAG := $(IMAGE_NAME):$(VERSION)
 CPU_LATEST := $(IMAGE_NAME):latest

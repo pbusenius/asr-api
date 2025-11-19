@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: asr-api
-          image: "pbusenius/asr-api:0.1"
+          image: "pbusenius/asr-api:0.1.1"
           ports:
             - containerPort: 9000
           env:
