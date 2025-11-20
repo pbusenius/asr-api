@@ -1,15 +1,29 @@
 FROM swaggerapi/swagger-ui:v5.9.1 AS swagger-ui
 
-FROM python:3.10-bookworm
+FROM nvidia/cuda:12.1.0-base-ubuntu22.04
 
 LABEL org.opencontainers.image.source="https://github.com/pbusenius/asr-api"
 
-WORKDIR /app
+ENV PYTHON_VERSION=3.10
 
-# Install ffmpeg
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends ffmpeg && \
-    rm -rf /var/lib/apt/lists/*
+RUN export DEBIAN_FRONTEND=noninteractive \
+    && apt-get -qq update \
+    && apt-get -qq install --no-install-recommends \
+    python${PYTHON_VERSION} \
+    python${PYTHON_VERSION}-venv \
+    python3-pip \
+    libcudnn8 \
+    libcublas-12-1 \
+    libcublas-dev-12-1 \
+    ffmpeg \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN ln -s -f /usr/bin/python${PYTHON_VERSION} /usr/bin/python3 && \
+    ln -s -f /usr/bin/python${PYTHON_VERSION} /usr/bin/python && \
+    ln -s -f /usr/bin/pip3 /usr/bin/pip
+
+WORKDIR /app
 
 # Install uv
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
@@ -18,7 +32,24 @@ COPY . .
 COPY --from=swagger-ui /usr/share/nginx/html/swagger-ui.css swagger-ui-assets/swagger-ui.css
 COPY --from=swagger-ui /usr/share/nginx/html/swagger-ui-bundle.js swagger-ui-assets/swagger-ui-bundle.js
 
-RUN uv sync --extra cpu
+# Install CUDA dependencies from PyTorch CUDA index
+# Strategy: Install torch/torchaudio separately with uv pip install (respects UV_NO_VERIFY_HASHES)
+# Then install rest of dependencies with uv sync (without cuda extra)
+RUN uv sync && \
+    UV_NO_VERIFY_HASHES=1 uv pip install \
+    --extra-index-url https://download.pytorch.org/whl/cu121 \
+    torch==2.7.1 torchaudio==2.7.1
+
+# Download Whisper model during build
+ARG ASR_MODEL=base
+ARG ASR_ENGINE=faster_whisper
+ENV ASR_MODEL=${ASR_MODEL}
+ENV ASR_ENGINE=${ASR_ENGINE}
+ENV ASR_MODEL_PATH=/app/models
+
+RUN mkdir -p /app/models && \
+    uv run python scripts/download_model.py && \
+    echo "Model downloaded to /app/models"
 
 EXPOSE 9000
 
