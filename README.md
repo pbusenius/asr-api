@@ -15,6 +15,7 @@ Current release (v1.10.0-dev) supports following whisper models:
 - [SYSTRAN/faster-whisper](https://github.com/SYSTRAN/faster-whisper)@[v1.1.1](https://github.com/SYSTRAN/faster-whisper/releases/tag/v1.1.1)
 - [whisperX](https://github.com/m-bain/whisperX)@[v3.4.2](https://github.com/m-bain/whisperX/releases/tag/v3.4.2)
 - [Voxtral](https://voxtral.life/) (Mistral AI)
+- [vLLM Whisper](https://docs.vllm.ai/en/stable/contributing/model/transcription.html) (High-performance Whisper serving with vLLM)
 
 ## Quick Usage
 
@@ -48,7 +49,7 @@ docker run -d -p 9000:9000 \
 
 ## Key Features
 
-- Multiple ASR engines support (OpenAI Whisper, Faster Whisper, WhisperX, Voxtral)
+- Multiple ASR engines support (OpenAI Whisper, Faster Whisper, WhisperX, Voxtral, vLLM Whisper)
 - Multiple output formats (text, JSON, VTT, SRT, TSV)
 - Word-level timestamps support
 - Voice activity detection (VAD) filtering
@@ -65,7 +66,7 @@ docker run -d -p 9000:9000 \
 
 Key configuration options:
 
-- `ASR_ENGINE`: Engine selection (openai_whisper, faster_whisper, whisperx, voxtral)
+- `ASR_ENGINE`: Engine selection (openai_whisper, faster_whisper, whisperx, voxtral, vllm_whisper)
 - `ASR_MODEL`: Model selection (tiny, base, small, medium, large-v3, etc. or Voxtral-Mini-3B-2507 for Voxtral)
 - `ASR_MODEL_PATH`: Custom path to store/load models
 - `ASR_DEVICE`: Device selection (cuda, cpu)
@@ -75,6 +76,37 @@ Key configuration options:
 - `OTEL_EXPORTER_OTLP_ENDPOINT`: Optional OTLP endpoint for traces/metrics
 - `OTEL_PROMETHEUS_METRICS_PATH`: Path for Prometheus metrics endpoint (default: /metrics)
 - `OTEL_LOG_LEVEL`: Set to "debug" to enable console span exporter for debugging
+
+### vLLM Whisper Configuration
+
+When using `vllm_whisper` engine, you need to run a separate vLLM server. Configure the connection with:
+
+- `VLLM_BASE_URL`: Base URL of the vLLM server (default: `http://localhost:8000/v1`)
+- `VLLM_API_KEY`: API key for vLLM (default: `dummy-key`)
+- `VLLM_MODEL`: Model name/path for vLLM (default: uses `ASR_MODEL` value)
+
+**Starting vLLM Server:**
+
+```shell
+# Start vLLM server with Whisper model
+vllm serve openai/whisper-large-v3 --trust-remote-code --task transcription --port 8000
+```
+
+**Using vLLM Whisper in ASR-API:**
+
+```shell
+docker run -d -p 9000:9000 \
+  -e ASR_ENGINE=vllm_whisper \
+  -e VLLM_BASE_URL=http://vllm-server:8000/v1 \
+  -e VLLM_MODEL=openai/whisper-large-v3 \
+  pbusenius/asr-api:latest
+```
+
+**Benefits of vLLM Whisper:**
+- High-performance inference with continuous batching
+- Optimized memory usage with PagedAttention
+- Better GPU utilization
+- OpenAI-compatible API
 
 ## OpenTelemetry Konfiguration
 
