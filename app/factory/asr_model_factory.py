@@ -3,6 +3,7 @@ from app.asr_models.faster_whisper_engine import FasterWhisperASR
 from app.asr_models.mbain_whisperx_engine import WhisperXASR
 from app.asr_models.openai_whisper_engine import OpenAIWhisperASR
 from app.asr_models.voxtral_engine import VoxtralASR
+from app.asr_models.vllm_whisper_engine import VLLMWhisperASR
 from app.config import CONFIG
 
 
@@ -17,5 +18,7 @@ class ASRModelFactory:
             return WhisperXASR()
         elif CONFIG.ASR_ENGINE == "voxtral":
             return VoxtralASR()
+        elif CONFIG.ASR_ENGINE == "vllm_whisper":
+            return VLLMWhisperASR()
         else:
             raise ValueError(f"Unsupported ASR engine: {CONFIG.ASR_ENGINE}")
