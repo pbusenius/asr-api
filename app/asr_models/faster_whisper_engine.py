@@ -14,13 +14,29 @@ from app.utils import ResultWriter, WriteJSON, WriteSRT, WriteTSV, WriteTXT, Wri
 class FasterWhisperASR(ASRModel):
 
     def load_model(self):
-
-        self.model = WhisperModel(
-            model_size_or_path=CONFIG.MODEL_NAME,
-            device=CONFIG.DEVICE,
-            compute_type=CONFIG.MODEL_QUANTIZATION,
-            download_root=CONFIG.MODEL_PATH
-        )
+        device = CONFIG.DEVICE
+        compute_type = CONFIG.MODEL_QUANTIZATION
+        
+        try:
+            self.model = WhisperModel(
+                model_size_or_path=CONFIG.MODEL_NAME,
+                device=device,
+                compute_type=compute_type,
+                download_root=CONFIG.MODEL_PATH
+            )
+        except RuntimeError as e:
+            if device == "cuda" and ("CUDA" in str(e) or "cuda" in str(e).lower()):
+                print(f"CUDA error during model loading: {e}, falling back to CPU")
+                device = "cpu"
+                compute_type = "int8"
+                self.model = WhisperModel(
+                    model_size_or_path=CONFIG.MODEL_NAME,
+                    device=device,
+                    compute_type=compute_type,
+                    download_root=CONFIG.MODEL_PATH
+                )
+            else:
+                raise
 
         Thread(target=self.monitor_idleness, daemon=True).start()
 
