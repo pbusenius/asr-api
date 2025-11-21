@@ -18,9 +18,12 @@ spec:
         app: asr-api
         variant: gpu
     spec:
+      runtimeClassName: nvidia
+      nodeSelector:
+        nvidia.com/gpu.present: "true"
       containers:
         - name: asr-api
-          image: "pbusenius/asr-api:0.1.3-gpu"
+          image: "pbusenius/asr-api:0.1.7"
           ports:
             - containerPort: 9000
           env:

@@ -1,6 +1,6 @@
 FROM swaggerapi/swagger-ui:v5.9.1 AS swagger-ui
 
-FROM nvidia/cuda:12.1.0-base-ubuntu22.04
+FROM nvidia/cuda:12.6.3-base-ubuntu22.04
 
 LABEL org.opencontainers.image.source="https://github.com/pbusenius/asr-api"
 
@@ -13,8 +13,8 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     python${PYTHON_VERSION}-venv \
     python3-pip \
     libcudnn8 \
-    libcublas-12-1 \
-    libcublas-dev-12-1 \
+    libcublas-12-6 \
+    libcublas-dev-12-6 \
     ffmpeg \
     curl \
     && rm -rf /var/lib/apt/lists/*
@@ -37,7 +37,7 @@ COPY --from=swagger-ui /usr/share/nginx/html/swagger-ui-bundle.js swagger-ui-ass
 # Then install rest of dependencies with uv sync (without cuda extra)
 RUN uv sync && \
     UV_NO_VERIFY_HASHES=1 uv pip install \
-    --extra-index-url https://download.pytorch.org/whl/cu121 \
+    --extra-index-url https://download.pytorch.org/whl/cu126 \
     torch==2.7.1 torchaudio==2.7.1
 
 # Download Whisper model during build

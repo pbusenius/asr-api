@@ -1,7 +1,7 @@
 .PHONY: build push clean clean-images clean-containers help
 
 # Variables
-VERSION := 0.1.3
+VERSION := 0.1.7
 IMAGE_NAME := pbusenius/asr-api
 IMAGE_TAG := $(IMAGE_NAME):$(VERSION)
 IMAGE_LATEST := $(IMAGE_NAME):latest
