@@ -58,6 +58,8 @@ uv run benchmark/benchmark.py \
 - `--data-dir`: Directory containing audio files (default: data)
 - `--concurrent`: Number of concurrent requests (default: 1)
 
+**Note:** Language is handled externally by the API. The benchmark script does not specify a language parameter, allowing the API to auto-detect or use the language configured in the API itself.
+
 ## Output
 
 The script provides:
